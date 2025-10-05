@@ -2,6 +2,8 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import router from "./app/route";
+import notFoundHandler from "./app/middleware/notFoundHandler";
+import globalErrorHandler from "./app/middleware/globalErrorHandler";
 
 // import fetch from "node-fetch";
 const app = express();
@@ -16,5 +18,11 @@ app.get("/", (req, res, next) => {
 
 // routing
 app.use("/api/v1", router);
+
+// not found handler
+app.use(notFoundHandler);
+
+// default error handler
+app.use(globalErrorHandler);
 
 export default app;
