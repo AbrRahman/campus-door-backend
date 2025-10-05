@@ -7,11 +7,11 @@ const createACollageIntoDB = async (payload: Partial<TCollege>, file: any) => {
   // upload into cloudinary
   const upload_url = await uploadImageCloudinary(file?.buffer);
   const secure_url = upload_url?.secure_url as string;
-  let newService = new CollegeModel({
+  let newCollege = new CollegeModel({
     ...payload,
     image: secure_url,
   });
-  const result = await newService.save();
+  const result = await newCollege.save();
   return result;
 };
 

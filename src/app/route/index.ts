@@ -3,6 +3,8 @@ const router = express.Router();
 import userRouter from "../modules/user/user.routes";
 import authRouter from "../modules/auth/auth.routes";
 import collegeRouter from "../modules/college/college.routes";
+import admissionRouter from "../modules/admission/admission.routes";
+import reviewRouter from "../modules/review/review.routes";
 
 const moduleRouter = [
   {
@@ -16,6 +18,14 @@ const moduleRouter = [
   {
     path: "/auth",
     route: collegeRouter,
+  },
+  {
+    path: "/admission",
+    route: admissionRouter,
+  },
+  {
+    path: "/review",
+    route: reviewRouter,
   },
 ];
 
