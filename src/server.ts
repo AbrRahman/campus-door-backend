@@ -3,6 +3,7 @@ import app from "./app";
 
 import mongoose from "mongoose";
 import config from "./app/config";
+import seedSuperAdmin from "./app/DB";
 let server: Server;
 
 const main = async () => {
@@ -17,6 +18,9 @@ const main = async () => {
         console.log("db connection field");
       });
 
+    // create super user
+    await seedSuperAdmin();
+
     server = app.listen(config.port, () => {
       console.log(`app is listening port ${config.port}...`);
     });
@@ -27,3 +31,16 @@ const main = async () => {
 
 // main function call
 main();
+
+// handle unhandledRejection
+process.on("unhandledRejection", () => {
+  if (server) {
+    server.close(() => {
+      process.exit(1);
+    });
+  }
+  process.exit(1);
+});
+
+// // handel uncaught exception
+process.on("uncaughtException", () => [process.exit(1)]);
