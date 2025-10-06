@@ -11,6 +11,7 @@ import AppError from "../errors/appError";
 import { TErrorSource } from "../interface/interface.error";
 
 const globalErrorHandler: ErrorRequestHandler = (error, req, res, next) => {
+  console.log(error);
   let message = "Something went wrong";
   let statusCode = error?.statusCode || HttpStatus.INTERNAL_SERVER_ERROR;
   let errorSource: TErrorSource = [

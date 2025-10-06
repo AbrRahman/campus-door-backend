@@ -16,7 +16,7 @@ const moduleRouter = [
     route: authRouter,
   },
   {
-    path: "/auth",
+    path: "/college",
     route: collegeRouter,
   },
   {

@@ -13,7 +13,6 @@ const loginUser = async (payload: { email: string; password: string }) => {
   const user = await UserModel.findOne({ email: payload.email }).select(
     "+password"
   );
-
   if (!user) {
     throw new AppError(status.UNAUTHORIZED, "Unauthorized user");
   }
@@ -22,7 +21,6 @@ const loginUser = async (payload: { email: string; password: string }) => {
     payload?.password,
     user?.password as string
   );
-
   if (!match) {
     throw new AppError(status.UNAUTHORIZED, "Unauthorized user");
   }
@@ -30,7 +28,7 @@ const loginUser = async (payload: { email: string; password: string }) => {
   const jwt_payload = {
     _id: user?._id,
     email: user?.email,
-    role: user?.role,
+    name: user?.name,
   };
   const access_token_secret = config.jwt_access_secret as string;
   const access_token_expires = config.jwt_access_exp_time as string;
