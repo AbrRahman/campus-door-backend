@@ -4,12 +4,13 @@ import cookieParser from "cookie-parser";
 import router from "./app/route";
 import notFoundHandler from "./app/middleware/notFoundHandler";
 import globalErrorHandler from "./app/middleware/globalErrorHandler";
+import config from "./app/config";
 
 // import fetch from "node-fetch";
 const app = express();
 
 app.use(express.json());
-app.use(cors({ origin: "", credentials: true }));
+app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 app.use(cookieParser());
 
 app.get("/", (req, res, next) => {

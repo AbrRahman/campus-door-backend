@@ -17,10 +17,12 @@ const loginUser = async (payload: { email: string; password: string }) => {
     throw new AppError(status.UNAUTHORIZED, "Unauthorized user");
   }
 
-  const match = await bcrypt.compare(
+  const match = await bcrypt?.compare(
     payload?.password,
     user?.password as string
   );
+
+  console.log(match);
   if (!match) {
     throw new AppError(status.UNAUTHORIZED, "Unauthorized user");
   }
@@ -165,11 +167,12 @@ const updateUserProfileIntoDB = async (
   payload: Partial<TUser>
 ) => {
   let newProfile = payload;
-  if (file?.path) {
-    const { path } = file;
-    // upload into cloudinary
-    const upload_url = await uploadImageCloudinary(path?.buffer);
+
+  if (file) {
+    // upload into
+    const upload_url = await uploadImageCloudinary(file?.buffer);
     const secure_url = upload_url?.secure_url as string;
+
     newProfile = {
       image: secure_url,
       ...payload,

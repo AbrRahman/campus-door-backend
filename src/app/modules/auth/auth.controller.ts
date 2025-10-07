@@ -99,6 +99,7 @@ const getUserProfile = catchAsync(async (req, res, next) => {
 // update user profile
 const updateProfile = catchAsync(async (req, res, next) => {
   const id = req?.user?._id as string;
+
   const result = await authService.updateUserProfileIntoDB(
     id,
     req?.file,

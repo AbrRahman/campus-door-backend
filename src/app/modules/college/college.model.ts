@@ -29,6 +29,11 @@ const collegeSchema = new Schema<TCollege>(
       require: true,
       trim: true,
     },
+    admissionProcess: {
+      type: String,
+      require: true,
+      trim: true,
+    },
     events: {
       type: [String],
       require: true,

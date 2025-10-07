@@ -7,6 +7,7 @@ type TCollege = {
   description: string;
   events: string[];
   sports: string[];
+  admissionProcess: string;
   researchWorks: string[];
 };
 

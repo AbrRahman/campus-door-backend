@@ -20,9 +20,9 @@ const createAdmission = catchAsync(async (req, res, next) => {
   });
 });
 
-const getUserAdmission = catchAsync(async (req, res, next) => {
+const getMyAdmittedCollege = catchAsync(async (req, res, next) => {
   const userId = req?.user?._id;
-  const result = await admissionService.getUserAllAdmissionFromDB(userId);
+  const result = await admissionService.getMyAdmittedCollegeFromDB(userId);
 
   let success = true;
   let message = "Get my admission data successfully";
@@ -39,6 +39,6 @@ const getUserAdmission = catchAsync(async (req, res, next) => {
 
 const admissionController = {
   createAdmission,
-  getUserAdmission,
+  getMyAdmittedCollege,
 };
 export default admissionController;

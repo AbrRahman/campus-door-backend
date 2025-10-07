@@ -1,13 +1,14 @@
 import multer from "multer";
+import path from "path";
 import { v2 as cloudinary } from "cloudinary";
 import config from "../config";
-
 import streamifier from "streamifier";
+
 // Configuration
 cloudinary.config({
-  cloud_name: config.cloudinary_cloud_name!,
-  api_key: config.cloudinary_api_key!,
-  api_secret: config.cloudinary_api_secret!,
+  cloud_name: config.cloudinary_cloud_name as string,
+  api_key: config.cloudinary_api_key as string,
+  api_secret: config.cloudinary_api_secret as string,
 });
 
 interface CloudinaryUploadResult {
@@ -33,8 +34,13 @@ export const uploadImageCloudinary = (
   });
 };
 
-const storage = multer.memoryStorage();
+// delete image in cloudinary
+export const deleteImageCloudinary = async (public_id: string) => {
+  await cloudinary.uploader.destroy(public_id);
+};
 
+const storage = multer.memoryStorage();
+//  for vercel
 const fileFilter = (req: any, file: Express.Multer.File, cb: any) => {
   if (file.mimetype.startsWith("image/")) {
     cb(null, true);

@@ -5,7 +5,7 @@ import UserModel from "./user.model";
 const createUserIntoDb = async (payload: Partial<TUser>, file: any) => {
   let newUser;
 
-  if (file?.path && file?.fieldname) {
+  if (file) {
     // upload into cloudinary
     const upload_url = await uploadImageCloudinary(file?.buffer);
     const secure_url = upload_url?.secure_url as string;

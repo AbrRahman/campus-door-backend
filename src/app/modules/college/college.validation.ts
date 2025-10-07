@@ -7,6 +7,7 @@ const createCollegeValidationSchema = z.object({
     description: z.string().trim().min(1, "Description is required"),
     rating: z.string().trim().min(1, "Rating is required"),
     researchCount: z.string().trim().min(1, "Research Count is required"),
+    admissionProcess: z.string().trim().min(1, "Admission Process required"),
     events: z.array(z.string()).default([]),
     sports: z.array(z.string()).default([]),
     researchWorks: z.array(z.string()).default([]),
@@ -21,6 +22,7 @@ const updateCollegeValidationSchema = z.object({
     researchCount: z.string().optional(),
     events: z.array(z.string()).optional(),
     sports: z.array(z.string()).optional(),
+    admissionProcess: z.array(z.string()).optional(),
     researchWorks: z.array(z.string()).optional(),
   }),
 });

@@ -40,21 +40,11 @@ const userSchema = new Schema<TUser>(
   { timestamps: true }
 );
 
-// hashing password
 userSchema.pre("save", async function (next) {
-  try {
-    const user = this;
-
-    if (user.password && user.password?.length) {
-      user.password = await bcrypt.hash(user.password, 10);
-    }
-    next();
-  } catch (err) {
-    next(err as Error);
-  }
+  const user = this;
+  user.password = await bcrypt.hash(user.password as string, 10);
+  next();
 });
-
-//after retrieve password set empty
 userSchema.post("save", async function (doc, next) {
   doc.password = "";
   next();

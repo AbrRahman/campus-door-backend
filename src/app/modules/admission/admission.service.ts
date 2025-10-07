@@ -19,15 +19,16 @@ const createAdmissionIntoDb = async (
 };
 
 // get user admission
-const getUserAllAdmissionFromDB = async (userId: string) => {
-  const result = await AdmissionModel.findOne({ user: userId })
+const getMyAdmittedCollegeFromDB = async (userId: string) => {
+  const result = await AdmissionModel.find({ user: userId })
     .populate("user")
-    .populate("college");
+    .populate("college")
+    .sort("-createdAt");
   return result;
 };
 
 const admissionService = {
   createAdmissionIntoDb,
-  getUserAllAdmissionFromDB,
+  getMyAdmittedCollegeFromDB,
 };
 export default admissionService;
